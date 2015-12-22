@@ -303,7 +303,7 @@ Scan request output example with public address 00:07:80:81:44:94 and RSSI -57:
 
     # start advertising as non-connectable with userdata and enhanced broadcasting
     #print "Entering advertisement mode..."
-    ble_cmd_gap_set_mode(ser, 0x84, 0)
+    ble_cmd_gap_set_mode(ser, 0x84, 0x01)
     response = ser.read(6) # 6-byte response
     #for b in response: print '%02X' % ord(b),
 
