@@ -400,7 +400,7 @@ def bgapi_parse(b):
                                 if this_field[0] == 0xFF: # manufactuerer specific data
                                     ad_manufacturer.append(this_field[1:])
 
-                    print "gap_scan_response: rssi: %d, packet_type: %d, sender: %s, address_type: %d, bond: %d, data_len: %d" % \
+                    print "gap_scan_response: rssi: %d, packet_type: %d, sender: %s, address_type: %d, bond: %d, data_len: %d" 
                     #    (rssi, packet_type, ':'.join(['%02X' % ord(b) for b in sender[::-1]]), address_type, bond, data_len)
                     t = datetime.datetime.now()
 
