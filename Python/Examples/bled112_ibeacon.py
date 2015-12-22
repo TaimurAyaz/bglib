@@ -249,24 +249,24 @@ Scan request output example with public address 00:07:80:81:44:94 and RSSI -57:
         exit(2)
 
     # flush buffers
-    #print "Flushing serial I/O buffers..."
+    print "Flushing serial I/O buffers..."
     ser.flushInput()
     ser.flushOutput()
 
     # disconnect if we are connected already
-    #print "Disconnecting if connected..."
+    print "Disconnecting if connected..."
     ble_cmd_connection_disconnect(ser, 0)
     response = ser.read(7) # 7-byte response
     #for b in response: print '%02X' % ord(b),
 
     # stop advertising if we are advertising already
-    #print "Exiting advertising mode if advertising..."
+    print "Exiting advertising mode if advertising..."
     ble_cmd_gap_set_mode(ser, 0, 0)
     response = ser.read(6) # 6-byte response
     #for b in response: print '%02X' % ord(b),
 
     # stop scanning if we are scanning already
-    #print "Exiting scanning mode if scanning..."
+    print "Exiting scanning mode if scanning..."
     ble_cmd_gap_end_procedure(ser)
     response = ser.read(6) # 6-byte response
     #for b in response: print '%02X' % ord(b),
@@ -302,7 +302,7 @@ Scan request output example with public address 00:07:80:81:44:94 and RSSI -57:
     #for b in response: print '%02X' % ord(b),
 
     # start advertising as non-connectable with userdata and enhanced broadcasting
-    #print "Entering advertisement mode..."
+    print "Entering advertisement mode..."
     ble_cmd_gap_set_mode(ser, 0x84, 0x01)
     response = ser.read(6) # 6-byte response
     #for b in response: print '%02X' % ord(b),
@@ -345,9 +345,9 @@ def bgapi_parse(b):
     elif len(bgapi_rx_buffer) > 1:
         bgapi_rx_buffer.append(b)
 
-    #print '%02X: %d, %d' % (b, len(bgapi_rx_buffer), bgapi_rx_expected_length)
+    print '%02X: %d, %d' % (b, len(bgapi_rx_buffer), bgapi_rx_expected_length)
     if bgapi_rx_expected_length > 0 and len(bgapi_rx_buffer) == bgapi_rx_expected_length:
-        #print '<=[ ' + ' '.join(['%02X' % b for b in bgapi_rx_buffer ]) + ' ]'
+        print '<=[ ' + ' '.join(['%02X' % b for b in bgapi_rx_buffer ]) + ' ]'
         packet_type, payload_length, packet_class, packet_command = bgapi_rx_buffer[:4]
         bgapi_rx_payload = b''.join(chr(i) for i in bgapi_rx_buffer[4:])
         if packet_type & 0x80 == 0x00: # response
@@ -400,7 +400,7 @@ def bgapi_parse(b):
                                 if this_field[0] == 0xFF: # manufactuerer specific data
                                     ad_manufacturer.append(this_field[1:])
 
-                    #print "gap_scan_response: rssi: %d, packet_type: %d, sender: %s, address_type: %d, bond: %d, data_len: %d" % \
+                    print "gap_scan_response: rssi: %d, packet_type: %d, sender: %s, address_type: %d, bond: %d, data_len: %d" % \
                     #    (rssi, packet_type, ':'.join(['%02X' % ord(b) for b in sender[::-1]]), address_type, bond, data_len)
                     t = datetime.datetime.now()
 
@@ -416,7 +416,7 @@ def bgapi_parse(b):
 
 # gracefully exit without a big exception message if possible
 def ctrl_c_handler(signal, frame):
-    #print 'Goodbye, cruel world!'
+    print 'Goodbye, cruel world!'
     exit(0)
 
 signal.signal(signal.SIGINT, ctrl_c_handler)
