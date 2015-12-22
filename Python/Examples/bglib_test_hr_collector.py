@@ -136,7 +136,7 @@ att_handle_measurement_ccc = 0
 uuid_service = [0x28, 0x00] # 0x2800
 uuid_client_characteristic_configuration = [0x29, 0x02] # 0x2902
 
-uuid_hr_service = [0x18, 0x0d] # 0x180D
+uuid_hr_service = [0x16, 0x0d] # 0x180D
 uuid_hr_characteristic = [0x2a, 0x37] # 0x2A37
 
 STATE_STANDBY = 0
